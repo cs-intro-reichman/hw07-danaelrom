@@ -6,7 +6,7 @@ public class SpellChecker {
 		String word = args[0];
 		int threshold = Integer.parseInt(args[1]);
 		String[] dictionary = readDictionary("dictionary.txt");
-		String correction = spellChecker("coooool", 3, dictionary);
+		String correction = spellChecker(word, threshold, dictionary);
 		System.out.println(correction);
 	}
 
@@ -49,16 +49,15 @@ public class SpellChecker {
 	
 
 	public static String spellChecker(String word, int threshold, String[] dictionary) {
-		int min = 99999;
+		int min = word.length();
 		String minimal = word;
 		for(int i = 0; i < dictionary.length; i++){
-			int distance = levenshtein(word,dictionary[i]);
-			if((distance <= min) && (distance <=threshold)){
+			int distance = levenshtein(word, dictionary[i]);
+			if((distance < min) && (distance <= threshold)){
 				min = distance;
 				minimal = dictionary[i];
 			}
 		}
-		
 		return minimal;
 	}
 	
