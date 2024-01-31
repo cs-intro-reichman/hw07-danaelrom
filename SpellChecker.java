@@ -50,19 +50,16 @@ public class SpellChecker {
 
 	public static String spellChecker(String word, int threshold, String[] dictionary) {
 		int min = 99999;
-		String minimal = "";
+		String minimal = word;
 		for(int i = 0; i < dictionary.length; i++){
 			int distance = levenshtein(word,dictionary[i]);
-			if(distance <= min){
+			if((distance <= min) && (distance <=threshold)){
 				min = distance;
 				minimal = dictionary[i];
 			}
 		}
-		if(min <= threshold){
-			return minimal;
-		}
-
-		return word;
+		
+		return minimal;
 	}
 	
 
